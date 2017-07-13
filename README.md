@@ -10,6 +10,7 @@ cd ml
 
 ### Dependências
 ```console
+node 6.0.0>
 npm install
 ```
 
