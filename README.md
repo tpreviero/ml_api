@@ -10,7 +10,7 @@ cd ml
 
 ### Dependências
 ```console
-npm start
+npm install
 ```
 
 ## Rodar o servidor
