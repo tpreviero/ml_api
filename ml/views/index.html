@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/style.min.css">
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+</head>
+<body ng-app="myapp" ng-controller="MainController">
+    <header>
+        <div class="container">
+            <figure>
+                <img src="assets/images/Logo_ML.png" alt="" class="logo">
+
+            </figure>
+            <form ng-submit="busca(q);">
+                <input type="text" name="q" ng-model="q" id="busca" placeholder="Nunca deixar de buscar" required>
+                <input type="submit">
+            </form>
+        </div>
+    </header>
+    <main>
+        <ng-view></ng-view>
+    </main>
+    <script>
+        var app = angular
+            .module('myapp', ['ngRoute', 'ngResource']);
+            
+            app.config(function($locationProvider, $routeProvider) {
+                $locationProvider.html5Mode(true);
+
+                $routeProvider.when('/', {
+                    controller: 'MainController'
+                })
+                .when('/items/search/:q', {
+                    templateUrl: 'partials/list.html',
+                })
+                .when('/items/:q', {
+                    controller: 'ProdutoController',
+                    templateUrl: 'partials/produto.html'
+                })
+                .otherwise({redirectTo: '/'});
+            });
+
+            app.controller('MainController', ['$scope', '$rootScope', '$http', '$location', function($scope, $rootScope, $http, $location) {
+                $scope.busca = function(q){
+                    $http.get('https://api.mercadolibre.com/sites/MLA/search?q=' + q)
+                        .then(function(response){
+                            if(response.data.results.length) {
+                                $rootScope.msgLista = false;
+                                $rootScope.list = response.data;
+                                console.log(response.data)
+                                $location.path('/items/search/' + q);
+                            } else {
+                                $rootScope.msgLista = 'Nenhum item encontrado, por favor faça outra busca :)';
+                                $rootScope.list = '';
+                                $location.path('/items/search/' + q);
+                            }
+                        }, function(){
+                            console.error();
+                        });
+                    
+                }
+            }]);
+            
+            app.controller('ProdutoController', ['$scope', '$http', '$routeParams', '$sce', function($scope, $http, $routeParams, $sce) {
+                if($routeParams.q) {
+                    $http.get('https://api.mercadolibre.com/items/' + $routeParams.q)
+                        .then(function(response){
+                            $scope.condition = response.data.condition == 'new' ? 'Novo' : 'Usado';
+                            $scope.price = '$' + response.data.price;
+                            $scope.produto = response.data;
+                        }, function(){
+                            console.error();
+                        });
+                    
+                    $http.get('https://api.mercadolibre.com/items/' + $routeParams.q + '/description')
+                    .then(function(response){
+                        $scope.descricao = $sce.trustAsHtml(response.data.text);
+                    }, function(){
+                        console.error();
+                    });
+                }
+            }]);
+    </script>
+</body>
+
+</html>

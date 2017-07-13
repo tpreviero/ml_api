@@ -1,0 +1,20 @@
+<p class="sessao"></p>
+<section id="descricao-produto">
+    <div class="container">
+        <div class="descricao-produto descricao-produto-col-md">
+            <img ng-repeat="img in produto.pictures" ng-if="$index == 0" ng-src="{{ img.url }}" alt="{{ img.id }}">
+        </div>
+        <div class="descricao-produto descricao-produto-col-sm descricao-produto__comprar">
+            <small>{{ condition }}</small>
+            <p>{{ produto.title }}</p>
+            <strong>{{ price }}</strong>
+            <a href="{{ produto.permalink }}" target="_blank">
+                <button>Comprar</button>
+            </a>
+        </div>
+        <div class="descricao-produto-col-md descricao-produto__detalhes">
+            <strong>Descrição do Produto</strong>
+            <div ng-bind-html="descricao"></div>
+        </div> 
+    </div>
+</section>

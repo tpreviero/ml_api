@@ -1,0 +1,24 @@
+<p class="sessao"></p>
+<section id="lista-produtos">
+    <div class="container">
+        <h1 ng-if="msgLista">{{ msgLista }}</h1>
+        <div class="item-produto-container" ng-repeat="item in list.results" ng-if="$index < 4">
+            <div class="item-produto item-produto-col-sm item-produto__thumb">
+                <figure>
+                    <a href="/items/{{ item.id }}">
+                        <img ng-src="{{ item.thumbnail }}" alt="">
+                    </a>
+                </figure>
+            </div>
+            <div class="item-produto item-produto-col-md item-produto__descricao">
+                <a href="/items/{{ item.id }}">
+                    <strong>${{ item.price }}<span ng-class="{'item-produto__shipping' : item.shipping.free_shipping == true}"></span></strong>
+                    <p>{{ item.title }}</p>
+                </a>
+            </div>
+            <div class="item-produto item-produto-col-sm item-produto__localidade">
+                <address>{{ item.address.state_name }}</address>
+            </div>
+        </div>
+    </div>
+</section>
