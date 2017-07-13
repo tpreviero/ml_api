@@ -135,6 +135,11 @@ main {
             padding: 100px;
         }
         @media only screen and (max-width: 414px) {
+            h1 {
+                padding: 25px;
+            }
+        }
+        @media only screen and (max-width: 414px) {
             .item-produto-container {
                 margin: 16px 0px 16px 0px !important; 
             }
