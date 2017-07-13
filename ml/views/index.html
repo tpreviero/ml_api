@@ -54,7 +54,6 @@
                             if(response.data.results.length) {
                                 $rootScope.msgLista = false;
                                 $rootScope.list = response.data;
-                                console.log(response.data)
                                 $location.path('/items/search/' + q);
                             } else {
                                 $rootScope.msgLista = 'Nenhum item encontrado, por favor faça outra busca :)';
