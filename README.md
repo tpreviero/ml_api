@@ -8,7 +8,7 @@ git clone git@github.com:tpreviero/ml_api.git
 cd ml
 ```
 
-### Dependencias
+### Dependências
 ```console
 npm start
 ```
