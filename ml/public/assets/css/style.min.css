@@ -190,7 +190,8 @@ main #descricao-produto .descricao-produto__comprar button {
 
 main #descricao-produto .descricao-produto__detalhes {
   float: left;
-  margin-left: 32px; }
+  margin-left: 32px;
+  clear: both; }
   main #descricao-produto .descricao-produto__detalhes strong {
     color: #666;
     font-size: 2.8em;

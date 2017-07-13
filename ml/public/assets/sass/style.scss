@@ -259,6 +259,7 @@ main {
         .descricao-produto__detalhes {
             float: left;
             margin-left: 32px;
+            clear: both;
             strong {
                 color: $chumbo;
                 font-size: $font-size-28;
