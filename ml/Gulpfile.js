@@ -1,19 +1,14 @@
 var gulp = require('gulp');
-var sass = require('gulp-sass');
-var uglifycss = require('gulp-uglifycss');
 var rename = require('gulp-rename');
+var sass = require('gulp-sass');
 
-gulp.task('styles', function() {
-    gulp.src('public/assets/sass/**/*.scss')
-        .pipe(uglifycss({
-            "maxLineLen": 80,
-            "uglyComments": true
-        }))
+gulp.task('css', function() {
+    gulp.src('public/assets/scss/**/*.scss')
         .pipe(rename({suffix: '.min'}))
-        .pipe(sass().on('error', sass.logError))
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(gulp.dest('public/assets/css/'))
 });
 
 gulp.task('default',function() {
-    gulp.watch('public/assets/sass/**/*.scss',['styles']);
+    gulp.watch('public/assets/scss/**/*.scss',['css']);
 });

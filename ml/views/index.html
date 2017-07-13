@@ -50,8 +50,9 @@
 
             app.controller('MainController', ['$scope', '$rootScope', '$http', '$location', function($scope, $rootScope, $http, $location) {
                 $scope.busca = function(q){
+                    $scope.q = '';
                     $http.get('https://api.mercadolibre.com/sites/MLA/search?q=' + q)
-                        .then(function(response){
+                        .then(function(response) {
                             if(response.data.results.length) {
                                 $rootScope.msgLista = false;
                                 $rootScope.list = response.data;
