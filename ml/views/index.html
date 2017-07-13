@@ -81,7 +81,6 @@
                     
                     $http.get('https://api.mercadolibre.com/items/' + $routeParams.q + '/description')
                     .then(function(response) {
-                        console.log(response.data)
                         $scope.plain_text = response.data.plain_text; 
                         $scope.text = $sce.trustAsHtml(response.data.text);
                     }, function(){
