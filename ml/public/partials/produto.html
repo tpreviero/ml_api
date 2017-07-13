@@ -12,9 +12,10 @@
                 <button>Comprar</button>
             </a>
         </div>
-        <div class="descricao-produto-col-md descricao-produto__detalhes">
+        <div class="descricao-produto-col-md descricao-produto__detalhes" ng-if="text || plain_text">
             <strong>Descrição do Produto</strong>
-            <div ng-bind-html="descricao"></div>
+            <div ng-if="text" ng-bind-html="text"></div>
+            <p ng-if="plain_text">{{ plain_text }}</p>
         </div> 
     </div>
 </section>

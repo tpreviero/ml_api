@@ -214,8 +214,12 @@ main {
             .descricao-produto-col-md {
                 height: auto;
             }
+            .descricao-produto-col-md > img {
+                margin: 16px 0px 16px 0px;
+            }
             .descricao-produto-col-sm {
                 max-width: 100% !important;
+                float: none !important;
             }
         }
         .descricao-produto-col-sm {

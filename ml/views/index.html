@@ -71,7 +71,7 @@
             app.controller('ProdutoController', ['$scope', '$http', '$routeParams', '$sce', function($scope, $http, $routeParams, $sce) {
                 if($routeParams.q) {
                     $http.get('https://api.mercadolibre.com/items/' + $routeParams.q)
-                        .then(function(response){
+                        .then(function(response) {
                             $scope.condition = response.data.condition == 'new' ? 'Novo' : 'Usado';
                             $scope.price = '$' + response.data.price;
                             $scope.produto = response.data;
@@ -80,8 +80,10 @@
                         });
                     
                     $http.get('https://api.mercadolibre.com/items/' + $routeParams.q + '/description')
-                    .then(function(response){
-                        $scope.descricao = $sce.trustAsHtml(response.data.text);
+                    .then(function(response) {
+                        console.log(response.data)
+                        $scope.plain_text = response.data.plain_text; 
+                        $scope.text = $sce.trustAsHtml(response.data.text);
                     }, function(){
                         console.error();
                     });
